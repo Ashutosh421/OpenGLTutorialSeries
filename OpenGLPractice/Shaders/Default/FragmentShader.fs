@@ -11,5 +11,6 @@ uniform float time;
 uniform float mixThreshold;
 
 void main(){
-	color = mix(texture(texture2D_1 , texCord), texture(texture2D_2 , texCord) , 0.5f);
+	//color = mix(texture(texture2D_1 , texCord), texture(texture2D_2 , texCord) , 0.5f);
+	color = vec4(1.0f , 1.5f , 1.5f , 1.0f);
 }

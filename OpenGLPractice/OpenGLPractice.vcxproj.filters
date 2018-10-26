@@ -68,6 +68,9 @@
     <None Include="Shaders\Default\FragmentShader_s5.fs" />
     <None Include="glfw3.dll" />
     <None Include="Shaders\Default\FragmentShader_s6.fs" />
+    <None Include="nanogui.dll" />
+    <None Include="assimp-vc140-mt.dll" />
+    <None Include="Models\Fbx\Susan.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utilities\FileUtils\FileUtils.h">
