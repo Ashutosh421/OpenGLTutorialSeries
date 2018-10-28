@@ -150,8 +150,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Application.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\Shader.cpp" />
+    <ClCompile Include="Core\Entity.cpp" />
+    <ClCompile Include="Core\Material.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math\Vector2f.cpp" />
     <ClCompile Include="Math\Vector3f.cpp" />
@@ -159,11 +162,17 @@
     <ClCompile Include="Math\Matrix3f.cpp" />
     <ClCompile Include="Math\Matrix4f.cpp" />
     <ClCompile Include="Core\Time.cpp" />
+    <ClCompile Include="Core\SceneManager.cpp" />
+    <ClCompile Include="Core\Scene.cpp" />
+    <ClCompile Include="Core\Mesh.cpp" />
+    <ClCompile Include="Core\MeshRenderer.cpp" />
+    <ClCompile Include="Utilities\LogFile\LogGenerator.cpp" />
     <ClCompile Include="Utilities\TextureUtils.cpp" />
     <ClCompile Include="Utilities\Scale\Scale.cpp" />
     <ClCompile Include="Utilities\FileUtils\FileUtils.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Utilities\ShaderUtils\ShaderUtils.cpp" />
+    <ClCompile Include="Core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp-vc140-mt.dll" />
@@ -180,8 +189,16 @@
     <None Include="Shaders\Default\VertexShader_s5.vs" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Application.h" />
     <ClInclude Include="Core\Camera.h" />
+    <ClInclude Include="Core\CException.h" />
+    <ClInclude Include="Core\GLFWKeyMap.h" />
+    <ClInclude Include="Core\IECompoent.h" />
     <ClInclude Include="Core\Shader.h" />
+    <ClInclude Include="Core\Entity.h" />
+    <ClInclude Include="Core\SObject.h" />
+    <ClInclude Include="Core\Material.h" />
+    <ClInclude Include="EventManagement\IKeyEvent.h" />
     <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="Math\Vector2f.h" />
     <ClInclude Include="Math\Vector3f.h" />
@@ -189,11 +206,17 @@
     <ClInclude Include="Math\Matrix3f.h" />
     <ClInclude Include="Math\Matrix4f.h" />
     <ClInclude Include="Core\Time.h" />
+    <ClInclude Include="Core\SceneManager.h" />
+    <ClInclude Include="Core\Scene.h" />
+    <ClInclude Include="Core\Mesh.h" />
+    <ClInclude Include="Core\MeshRenderer.h" />
+    <ClInclude Include="Utilities\LogFile\LogGenerator.h" />
     <ClInclude Include="Utilities\TextureUtils.h" />
     <ClInclude Include="Utilities\Scale\Scale.h" />
     <ClInclude Include="Utilities\FileUtils\FileUtils.h" />
     <ClInclude Include="Utilities\ShaderUtils\ShaderUtils.h" />
     <ClInclude Include="Core\Vertex.h" />
+    <ClInclude Include="Core\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\2DChar.png" />

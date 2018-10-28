@@ -5,18 +5,21 @@
 #include <string>
 #include <opencv2/opencv.hpp>
 
-class Texture
-{
-private:
-	GLuint textureID;
-	bool isReady = false;
-	GLuint textureUnit;
+namespace AR {
 
-public:
-	void bind(GLuint textureUnit);
-	void unbind();
+	class Texture
+	{
+	private:
+		GLuint textureID;
+		bool isReady = false;
+		GLuint textureUnit;
 
-	Texture(std::string, GLint imageFormat = GL_RGB);
-	~Texture();
-};
+	public:
+		void bind(GLuint textureUnit);
+		void unbind();
 
+		Texture(std::string, GLint imageFormat = GL_RGB);
+		~Texture();
+	};
+
+}

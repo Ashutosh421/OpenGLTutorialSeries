@@ -3,7 +3,7 @@
 #include <glm\vec3.hpp>
 #include <glm\vec2.hpp>
 
-namespace ar {
+namespace AR {
 	struct Vertex {
 		glm::vec3 position;    //3
 		glm::vec2 uv;		// 2

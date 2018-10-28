@@ -16,15 +16,27 @@
 #include "Core/Time.h"
 #include "Core/Camera.h" 
 
-Shader* s1;
-Texture* t1;
-Texture* t2;
+#include "Core\Entity.h"
+#include "Core\IECompoent.h"
+#include "Core\Mesh.h"
+#include "Core\MeshRenderer.h"
+
+#include "Core\Application.h"
+#include "EventManagement\IKeyEvent.h"
+
+//AR::Shader* s1;
+AR::Shader* s1;
+AR::Texture* t1;
+AR::Texture* t2;
 glm::vec2 mouseScreenCordinates{0.0f , 0.0f};
 glm::vec2 mouseDelta{0.0f , 0.0f};
 float pitch = 0.0f;
 float yaw = -90.0f;
 bool lockCamera = false;
 bool firstMouse = false;
+
+AR::Entity* e1 = new AR::Entity("Entity1" , 1);
+AR::Entity* e2 = new AR::Entity("Entity2", 2);
 
 GLFWwindow* mainWindow;
 int InitGLFW(short);
@@ -88,7 +100,7 @@ std::vector<GLfloat> vertices = {
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 };
 
-std::vector<ar::Vertex> susanSceneVertices;
+std::vector<AR::Vertex> susanSceneVertices;
 std::vector<GLuint> susanIndices;
 
 std::vector<GLubyte> indices ={
@@ -123,11 +135,14 @@ Assimp::Importer aImporter;
 
 int main(int args1, const char* args2) {
 
-	if (InitGLFW(1) > -1) {
-		InitGameData();
-		GameLoop(1);
+	if (AR::Application::Instance()->Init()) {
+		AR::Application::Instance()->Window()->EnableKeyEvents();
+			while (AR::Application::Instance()->IsRunning()) {
+			
+			AR::Application::Instance()->Update();
+		}
+		AR::Application::Instance()->Stop();
 	}
-
 	return 0;
 }
 
@@ -172,7 +187,7 @@ int InitGLFW(short verbose = 1) {
 */
 void GameLoop(short verbose = 1) {
 	if (verbose == 1) std::cout << "Launching game loop" << std::endl;
-	while (!glfwWindowShouldClose(mainWindow))
+	while (AR::Application::Instance()->IsRunning())
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		ProcessInput(verbose);
@@ -204,6 +219,7 @@ void GameLoop(short verbose = 1) {
 
 		glfwSwapBuffers(mainWindow);
 		glfwPollEvents();
+		std::cout << "Polling Events" << std::endl;
 	}
 }
 
@@ -217,7 +233,8 @@ void ErrorChecking() {
 
 void ProcessInput(short verbose = 1) {
 	if (glfwGetKey(mainWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-		glfwSetWindowShouldClose(mainWindow, true);
+		//glfwSetWindowShouldClose(mainWindow, true);
+		AR::Application::Instance()->Stop();
 	}
 
 	float cameraSpeed = 4.0f;
@@ -329,13 +346,17 @@ void InitGameData() {
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 	
-	s1 = new Shader{ "./Shaders/Default/VertexShader.vs", "./Shaders/Default/FragmentShader.fs", 1 };
+	s1 = new AR::Shader{ "./Shaders/Default/VertexShader.vs", "./Shaders/Default/FragmentShader.fs", 1 };
 	
 	GLint vertexAttribLength = 0;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &vertexAttribLength);
 	std::cout << "Total Number of Vertex Attributes supported: " << vertexAttribLength << std::endl;
 
 	mainCamera.position = glm::vec3(0.0f, 0.0f, 10.0f);
+
+	e1->AddComponent<AR::MeshRenderer>();
+
+	delete e1;
 }
 
 void LoadAssimpMesh() {
@@ -354,7 +375,7 @@ void LoadAssimpMesh() {
 				for (unsigned int j = 0; j < mesh->mNumVertices; j++)
 				{
 					aiVector3D position = mesh->mVertices[j];
-					susanSceneVertices.emplace_back(ar::Vertex(glm::vec3(position.x , position.y , position.z)));
+					susanSceneVertices.emplace_back(AR::Vertex(glm::vec3(position.x , position.y , position.z)));
 				}
 			}
 			if (mesh->HasFaces()) {

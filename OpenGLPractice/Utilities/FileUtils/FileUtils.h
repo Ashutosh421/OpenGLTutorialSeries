@@ -5,13 +5,17 @@
 #include <iostream>
 #include <assert.h>
 
-class FileUtils
-{
-private:
-	FileUtils() {};
-	~FileUtils() {};
+namespace AR {
 
-public:
-	static std::string ReadFileContent(const std::string&);
-};
+	class FileUtils
+	{
+	private:
+		FileUtils() {};
+		~FileUtils() {};
 
+	public:
+		static std::string ReadFileContent(const std::string&);
+		static void WriteToFile(const std::string&, const std::string&);
+	};
+
+}
