@@ -15,6 +15,7 @@
 #include "Core/Texture.h"
 #include "Core/Time.h"
 #include "Core/Camera.h" 
+#include "Core\GLFWKeyMap.h"
 
 #include "Core\Entity.h"
 #include "Core\IECompoent.h"
@@ -23,6 +24,11 @@
 
 #include "Core\Application.h"
 #include "EventManagement\IKeyEvent.h"
+#include "Core\InputManager.h"
+
+#include "Core\Scene.h";
+#include "Core\SceneManager.h"
+
 
 //AR::Shader* s1;
 AR::Shader* s1;
@@ -35,11 +41,15 @@ float yaw = -90.0f;
 bool lockCamera = false;
 bool firstMouse = false;
 
-AR::Entity* e1 = new AR::Entity("Entity1" , 1);
-AR::Entity* e2 = new AR::Entity("Entity2", 2);
+std::shared_ptr<AR::Entity> e1 = std::make_shared<AR::Entity>("Entity1" , 1);
+std::shared_ptr<AR::Entity> e2 = std::make_shared<AR::Entity>("Entity2", 2);
+
+std::shared_ptr<AR::Scene> scene1 = std::make_shared<AR::Scene>("Scene1");
+ 
 
 GLFWwindow* mainWindow;
-int InitGLFW(short);
+//int InitGLFW(short);
+void InitScene();
 void InitGameData();
 void LoadAssimpMesh();
 void GameLoop(short);
@@ -134,11 +144,15 @@ Assimp::Importer aImporter;
 
 
 int main(int args1, const char* args2) {
-
 	if (AR::Application::Instance()->Init()) {
-		AR::Application::Instance()->Window()->EnableKeyEvents();
-			while (AR::Application::Instance()->IsRunning()) {
-			
+		InitScene();
+
+		while (AR::Application::Instance()->IsRunning()) {
+			if (AR::InputManager::IsKeyDown(AR::KeyType::KEY_ESCAPE)) {
+				AR::Application::Instance()->Stop();
+			}
+
+			AR::SceneManager::Update();
 			AR::Application::Instance()->Update();
 		}
 		AR::Application::Instance()->Stop();
@@ -146,41 +160,15 @@ int main(int args1, const char* args2) {
 	return 0;
 }
 
-/*
-	On Init function
-*/
-int InitGLFW(short verbose = 1) {
-	glfwInit(); 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+void InitScene() {
+	AR::InputManager::SetCurrentWindow(AR::Application::Instance()->Window());
+	AR::SceneManager::AddScene(std::move(scene1));
+	AR::SceneManager::LoadScene(scene1->Name());
 
-	mainWindow = glfwCreateWindow(2048, 1536, "Test Window", nullptr, nullptr);
-	if (mainWindow == nullptr) {
-		std::cerr << "Failed to create GLFW Window" << std::endl;
-		ShutDown(verbose);
-		return -1;
-	}
-	if (verbose == 1) std::cout << "Window succesfully created" << std::endl;
-	glfwMakeContextCurrent(mainWindow);
-
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		std::cerr << "Failed to load GLAD!!";
-		ShutDown(verbose);
-		return -1;
-	}
-	if (verbose == 1) std::cout << "GLAD successfully loaded" << std::endl;
-
-	//glViewport(0, 0, 2048, 1536);
-	Scale::setViewPort(0, 0, 2048, 1536);
-	
-	//Set Callbacks
-	glfwSetWindowSizeCallback(mainWindow , On_GLFW_Window_Resize);
-	glfwSetCursorPosCallback(mainWindow, On_GLFW_CursorPositionMove);
-	glfwSetKeyCallback(mainWindow, On_GLFW_Key_Pressed);
-	glfwSetScrollCallback(mainWindow, On_GLFW_Scrolled);
-	return 0;
+	scene1->AddChild(std::move(e1));
+	scene1->AddChild(std::move(e2));
 }
+
 
 /*
 	Application infinite loop
@@ -355,8 +343,6 @@ void InitGameData() {
 	mainCamera.position = glm::vec3(0.0f, 0.0f, 10.0f);
 
 	e1->AddComponent<AR::MeshRenderer>();
-
-	delete e1;
 }
 
 void LoadAssimpMesh() {

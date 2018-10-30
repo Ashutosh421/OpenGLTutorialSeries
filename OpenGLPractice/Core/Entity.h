@@ -35,6 +35,7 @@ namespace AR {
 
 		inline const std::forward_list<const Entity*>& Children() const { return this->children; };
 		inline const int ID() const { return this->id; };
+		inline const std::string Name() const { return this->name; }
 
 		~Entity();
 	};

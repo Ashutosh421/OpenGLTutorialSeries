@@ -155,6 +155,7 @@
     <ClCompile Include="Core\Shader.cpp" />
     <ClCompile Include="Core\Entity.cpp" />
     <ClCompile Include="Core\Material.cpp" />
+    <ClCompile Include="Core\InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math\Vector2f.cpp" />
     <ClCompile Include="Math\Vector3f.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Core\SObject.h" />
     <ClInclude Include="Core\Material.h" />
     <ClInclude Include="EventManagement\IKeyEvent.h" />
+    <ClInclude Include="Core\InputManager.h" />
     <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="Math\Vector2f.h" />
     <ClInclude Include="Math\Vector3f.h" />

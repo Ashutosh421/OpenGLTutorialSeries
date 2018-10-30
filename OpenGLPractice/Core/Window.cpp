@@ -23,26 +23,10 @@ namespace AR {
 		glfwSwapBuffers(this->glfwWindow);
 		glfwPollEvents();
 	}
-
-	void Window::EnableKeyEvents() {
-		//glfwSetKeyCallback(this->glfwWindow, [](GLFWwindow*, int key, int scancode, int action, int mode)->void {
-		//	//std::cout << "Key Pressed" << AR::KeyType[key] << std::endl;
-		//	//this->
-		//});
-	}
-
+	 
 	Window::~Window()
 	{
 		glfwDestroyWindow(this->glfwWindow);
-	}
-
-	void Window::RegisterKeyEventListener(std::shared_ptr<IKeyEvent> eventListener) {
-		for (std::shared_ptr<IKeyEvent> &x : this->keyEventListeners) {
-			if (x == eventListener) {
-				return;
-			}
-		}
-		this->keyEventListeners.push_front(eventListener);
 	}
 }
 

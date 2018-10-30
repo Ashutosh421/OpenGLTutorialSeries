@@ -28,7 +28,7 @@ namespace AR {
 	}
 
 	void Entity::OnUpdate() {
-		std::cout << "On Entity Update" << std::endl;
+		std::cout << "On Entity Update: " << this->name << std::endl;
 	}
 }
 

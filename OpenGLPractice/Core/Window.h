@@ -27,7 +27,6 @@ namespace AR {
 		unsigned int height{728};
 
 		GLFWwindow* glfwWindow;
-		std::forward_list<std::shared_ptr<IKeyEvent>> keyEventListeners;
 
 	public:
 		void EnableKeyEvents();
@@ -35,6 +34,7 @@ namespace AR {
 		void Update();
 		Window();
 		void RegisterKeyEventListener(std::shared_ptr<IKeyEvent>);
+		inline GLFWwindow* Raw() { return this->glfwWindow; }
 
 		~Window();
 	};

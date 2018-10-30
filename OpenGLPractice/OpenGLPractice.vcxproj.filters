@@ -84,6 +84,9 @@
     <ClCompile Include="Utilities\LogFile\LogGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Default\FragmentShader.fs" />
@@ -182,6 +185,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\GLFWKeyMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

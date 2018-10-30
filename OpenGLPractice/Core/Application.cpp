@@ -40,6 +40,9 @@ namespace AR {
 	}
 
 	void Application::Update() {
+		if (glfwWindowShouldClose(this->window->Raw())) {
+			this->Stop();
+		}
 		this->window->Update();
 	}
 }
