@@ -1,16 +1,20 @@
 #include "Entity.h"
 
 namespace AR {
-	Entity::Entity(const std::string& name, u_long id):name(name),id(id)
+	Entity::Entity(std::string&& name, u_long id):name(name),id(id)
 	{
 		
 	}
 
-	Entity::~Entity()
-	{
+	void Entity::OnStart() {
+		for (auto &component : this->components) {
+			component->OnStart();
+		}
+	}
+
+	void Entity::OnDestroy() {
 		for (auto &component : this->components) {
 			component->OnDestroy();
-			delete component;
 		}
 	}
 
@@ -28,7 +32,10 @@ namespace AR {
 	}
 
 	void Entity::OnUpdate() {
-		std::cout << "On Entity Update: " << this->name << std::endl;
+		//std::cout << "On Entity Update: " << this->name << std::endl;
+		for (auto &component : this->components) {
+			component->OnUpdate();
+		}
 	}
 }
 

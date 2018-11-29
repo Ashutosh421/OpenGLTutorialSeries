@@ -13,7 +13,7 @@ namespace AR {
 		std::forward_list<AR::Texture> textures;
 
 	public:
-		Material(std::shared_ptr<AR::Shader>);
+		Material(std::shared_ptr<AR::Shader>&&);
 		~Material();
 
 		inline const std::shared_ptr<AR::Shader>& Shader() const { return this->shader; }

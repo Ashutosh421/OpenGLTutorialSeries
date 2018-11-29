@@ -13,6 +13,7 @@ namespace AR {
 		auto it = this->entities.find(entity->Name());
 		if (it == this->entities.end()) {
 			this->entities.insert({ entity->Name() , entity });
+			entity->OnStart();
 		}
 	}
 

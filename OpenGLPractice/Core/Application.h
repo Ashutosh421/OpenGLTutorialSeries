@@ -1,6 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <memory>
+#include <glad\glad.h>
 #include <GLFW\glfw3.h>
 #include <exception>
 #include <string>

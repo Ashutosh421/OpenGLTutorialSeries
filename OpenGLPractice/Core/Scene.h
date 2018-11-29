@@ -2,6 +2,7 @@
 #include <string>
 #include <unordered_map>
 #include "Entity.h"
+#include "..\Math\Color4f.h"
 
 namespace AR {
 	class Scene
@@ -11,6 +12,7 @@ namespace AR {
 		std::unordered_map<std::string, std::shared_ptr<AR::Entity>> entities;
 
 	public:
+		AR::Color4f backgroudColor = Color4f(0, 0, 0, 0);
 		explicit Scene(const std::string&&);
 		~Scene();
 

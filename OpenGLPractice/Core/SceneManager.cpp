@@ -1,3 +1,4 @@
+#include <glad\glad.h>
 #include "SceneManager.h"
 
 namespace AR {
@@ -19,7 +20,12 @@ namespace AR {
 	}
 
 	void SceneManager::Update() {
-		AR::SceneManager::currentScene->Update();
+		if (AR::SceneManager::currentScene) {
+			glClearColor(AR::SceneManager::currentScene->backgroudColor.r, AR::SceneManager::currentScene->backgroudColor.b, AR::SceneManager::currentScene->backgroudColor.g, AR::SceneManager::currentScene->backgroudColor.a);
+			glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
+			AR::SceneManager::currentScene->Update();
+		}
 	}
 }
 

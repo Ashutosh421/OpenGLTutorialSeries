@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -9,7 +10,7 @@
 #include <assimp\scene.h>
 #include <assimp\postprocess.h>B
 
-#include "Core\Vertex.h"
+#include "./Core/Vertex3f.h"
 #include "Core/Shader.h"
 #include "Utilities/Scale/Scale.h"
 #include "Core/Texture.h"
@@ -18,9 +19,9 @@
 #include "Core\GLFWKeyMap.h"
 
 #include "Core\Entity.h"
-#include "Core\IECompoent.h"
+#include "./Core/IEComponent.h"
 #include "Core\Mesh.h"
-#include "Core\MeshRenderer.h"
+#include "./Core/2D/MeshRenderer2D/MeshRenderer2D.h"
 
 #include "Core\Application.h"
 #include "EventManagement\IKeyEvent.h"
@@ -110,7 +111,7 @@ std::vector<GLfloat> vertices = {
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 };
 
-std::vector<AR::Vertex> susanSceneVertices;
+std::vector<AR::Vertex3f> susanSceneVertices;
 std::vector<GLuint> susanIndices;
 
 std::vector<GLubyte> indices ={
@@ -180,6 +181,8 @@ void GameLoop(short verbose = 1) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		ProcessInput(verbose);
 		Time::Update();
+
+		std::cout << "Game Loop" << std::endl;
 
 		glClearColor(0.3f, 0.3f, 0.3f, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -342,7 +345,7 @@ void InitGameData() {
 
 	mainCamera.position = glm::vec3(0.0f, 0.0f, 10.0f);
 
-	e1->AddComponent<AR::MeshRenderer>();
+	//e1->AddComponent<AR::MeshRenderer>();
 }
 
 void LoadAssimpMesh() {
@@ -361,7 +364,7 @@ void LoadAssimpMesh() {
 				for (unsigned int j = 0; j < mesh->mNumVertices; j++)
 				{
 					aiVector3D position = mesh->mVertices[j];
-					susanSceneVertices.emplace_back(AR::Vertex(glm::vec3(position.x , position.y , position.z)));
+					susanSceneVertices.emplace_back(AR::Vertex3f(glm::vec3(position.x , position.y , position.z)));
 				}
 			}
 			if (mesh->HasFaces()) {

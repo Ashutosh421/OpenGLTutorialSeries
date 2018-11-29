@@ -36,6 +36,9 @@ namespace AR {
 		void RegisterKeyEventListener(std::shared_ptr<IKeyEvent>);
 		inline GLFWwindow* Raw() { return this->glfwWindow; }
 
+		inline unsigned int Width() { return this->width; }
+		inline unsigned int Height() { return this->height; }
+
 		~Window();
 	};
 

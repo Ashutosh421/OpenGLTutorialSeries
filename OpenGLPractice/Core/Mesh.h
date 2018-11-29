@@ -1,17 +1,17 @@
 #pragma once
-#include "IECompoent.h"
+#include "IEComponent.h"
 #include <glm\vec3.hpp>
 #include <vector>
 #include <iostream>
 
-#include "Vertex.h"
+#include "Vertex3f.h"
 
 namespace AR {
 
 	class Mesh
 	{
 	public:
-		std::vector<AR::Vertex> vertices;
+		std::vector<AR::Vertex3f> vertices;
 
 		Mesh();
 		~Mesh();

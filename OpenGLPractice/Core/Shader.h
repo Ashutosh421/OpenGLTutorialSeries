@@ -28,7 +28,7 @@ namespace AR {
 		GLuint shaderProgram;
 
 
-		Shader(std::string vShaderPath = "VertexShader.fs", std::string fShaderPath = "FragmentShader.fs", short verbose = 0);
+		Shader(std::string vShaderPath = "./VertexShader2D.fs", std::string fShaderPath = "./FragmentShader2D.fs", short verbose = 0);
 		~Shader();
 	};
 }

@@ -17,7 +17,13 @@ namespace AR {
 				throw application_exception("GLFW Initialization Error", 15, "Application.cpp");
 			}
 			AR::LogGenerator::Log("GLFW Successfully Initialized");
-			this->window = std::make_shared<AR::Window>("Window_1", 1024, 768);
+			this->window = std::make_shared<AR::Window>("Window_1", 2048, 1536);
+			if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+			{
+				throw application_exception("GLAD Initialization Error", 24, "Application.cpp");
+			}
+			AR::LogGenerator::Log("GLAD Successfully Initialized");
+			glViewport(0, 0, this->window->Width(), this->window->Height());
 			this->isRunning = true;
 			return true;
 		}

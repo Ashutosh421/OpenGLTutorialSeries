@@ -12,10 +12,10 @@ namespace AR {
 		static void LoadScene(const std::string&);
 		static void AddScene(std::shared_ptr<AR::Scene>&&);
 		static void Update();
+		static std::shared_ptr<AR::Scene> currentScene;
 
 	private:
 		static std::unordered_map<std::string, std::shared_ptr<AR::Scene>> scenes;
-		static std::shared_ptr<AR::Scene> currentScene;
 
 		SceneManager() {};
 		~SceneManager() {};

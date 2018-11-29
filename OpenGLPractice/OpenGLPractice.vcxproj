@@ -156,7 +156,7 @@
     <ClCompile Include="Core\Entity.cpp" />
     <ClCompile Include="Core\Material.cpp" />
     <ClCompile Include="Core\InputManager.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main2D.cpp" />
     <ClCompile Include="Math\Vector2f.cpp" />
     <ClCompile Include="Math\Vector3f.cpp" />
     <ClCompile Include="Core\Texture.cpp" />
@@ -166,7 +166,9 @@
     <ClCompile Include="Core\SceneManager.cpp" />
     <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Core\Mesh.cpp" />
-    <ClCompile Include="Core\MeshRenderer.cpp" />
+    <ClCompile Include="Core\2D\Mesh2D\Mesh2D.cpp" />
+    <ClCompile Include="Core\2D\MeshRenderer2D\MeshRenderer2D.cpp" />
+    <ClCompile Include="Core\2D\Shapes2D\Rectangle\Rectangle.cpp" />
     <ClCompile Include="Utilities\LogFile\LogGenerator.cpp" />
     <ClCompile Include="Utilities\TextureUtils.cpp" />
     <ClCompile Include="Utilities\Scale\Scale.cpp" />
@@ -177,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp-vc140-mt.dll" />
+    <None Include="Shaders\2D\FragmentShader2D.fs" />
     <None Include="glfw3.dll" />
     <None Include="Models\Fbx\Susan.fbx" />
     <None Include="nanogui.dll" />
@@ -188,17 +191,21 @@
     <None Include="Shaders\Default\VertexShader_s3.vs" />
     <None Include="Shaders\Default\VertexShader_s4.vs" />
     <None Include="Shaders\Default\VertexShader_s5.vs" />
+    <None Include="Shaders\2D\VertexShader2D.vs" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Math\Color4f.h" />
     <ClInclude Include="Core\Application.h" />
     <ClInclude Include="Core\Camera.h" />
     <ClInclude Include="Core\CException.h" />
     <ClInclude Include="Core\GLFWKeyMap.h" />
-    <ClInclude Include="Core\IECompoent.h" />
+    <ClInclude Include="Core\IEComponent.h" />
     <ClInclude Include="Core\Shader.h" />
     <ClInclude Include="Core\Entity.h" />
     <ClInclude Include="Core\SObject.h" />
     <ClInclude Include="Core\Material.h" />
+    <ClInclude Include="Core\2D\Vertex2D\Vertex2f.h" />
+    <ClInclude Include="Core\TypeDefs.h" />
     <ClInclude Include="EventManagement\IKeyEvent.h" />
     <ClInclude Include="Core\InputManager.h" />
     <ClInclude Include="Math\Vector.h" />
@@ -211,13 +218,15 @@
     <ClInclude Include="Core\SceneManager.h" />
     <ClInclude Include="Core\Scene.h" />
     <ClInclude Include="Core\Mesh.h" />
-    <ClInclude Include="Core\MeshRenderer.h" />
+    <ClInclude Include="Core\2D\Mesh2D\Mesh2D.h" />
+    <ClInclude Include="Core\2D\MeshRenderer2D\MeshRenderer2D.h" />
+    <ClInclude Include="Core\2D\Shapes2D\Rectangle\Rectangle.h" />
     <ClInclude Include="Utilities\LogFile\LogGenerator.h" />
     <ClInclude Include="Utilities\TextureUtils.h" />
     <ClInclude Include="Utilities\Scale\Scale.h" />
     <ClInclude Include="Utilities\FileUtils\FileUtils.h" />
     <ClInclude Include="Utilities\ShaderUtils\ShaderUtils.h" />
-    <ClInclude Include="Core\Vertex.h" />
+    <ClInclude Include="Core\Vertex3f.h" />
     <ClInclude Include="Core\Window.h" />
   </ItemGroup>
   <ItemGroup>
